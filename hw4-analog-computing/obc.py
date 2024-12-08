@@ -12,7 +12,7 @@ import random
 import math
 import os
 
-from lib.basic_units import cos, degrees, radians
+from basic_units import cos, degrees, radians
 
 
 khz = 1000
