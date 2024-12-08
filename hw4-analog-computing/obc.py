@@ -14,7 +14,6 @@ import os
 
 from lib.basic_units import cos, degrees, radians
 
-from ising import random_mincut_graph, build_mincut_ising_model
 
 khz = 1000
 
@@ -211,22 +210,6 @@ class OBCDiffeqSystem:
             freqs[i]=np.abs(np.gradient(sol.y[i,:], sol.t[1]-sol.t[0]))
         return sol.t, phases, freqs
 
-
-def run_obc():
-    N = 5
-    obc = OBCDiffeqSystem(N)
-    edges = random_mincut_graph(N)
-
-    variables,energyfxn = build_maxcut_ising_model(N,edges)
-    for i in range(N):
-        for j in range(N):
-            coeff = energyfxn.diff(variables[i]).diff(variables[j])
-            if coeff != 0:
-                obc.set_coupling(coeff,i,j)
-
-    obc.random_initial_phase()
-    times, values = obc.run(1)
-    obc.render("obc.gif", times,values)
 
 
 def simple_obc_phaseonly():
