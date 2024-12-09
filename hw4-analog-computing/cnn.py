@@ -121,7 +121,7 @@ def run_cnn():
 
     #instantiate CNN
     cnn = CNNDiffeqSystem(28,28)
-    cnn.initVals = np.random.uniform(0,0.1, 28*28)
+    cnn.initVals = np.zeros(28*28)
     #set image as forcing function provided to U matrix.
     cnn.set_image(pixelData,scale=1.0)
 
@@ -152,7 +152,7 @@ def run_cnn():
         cnn.initialize(z=ZNZ1, A=ANZ1, B=BNZ1)
 
     elif EXERCISE == 3: 
-        cnn.initialize(z=ZNZ2, A=ANZ2, B=BNZ2)
+        cnn.initialize(z=z2, A=A2, B=B2)
 
     elif EXERCISE == 4:
        
