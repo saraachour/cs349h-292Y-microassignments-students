@@ -107,7 +107,7 @@ Q6. Enable `EXERCISE=5` - -this sets the frequency of oscillator "A" to a low fr
 
 
 
-### Part C: Grade Optimization with Integer Linear Programming [6 pts]
+### Part D: Grade Optimization with Integer Linear Programming [6 pts]
 
 Next we will use integer linear programming to optimize your grace days to maximize your grade. Look at `grade_optimizer.py`, which has the scaffold and an example grade report. The scaffold code has comments indicating where you should add constraints and modify expressions.
 
