@@ -1,6 +1,6 @@
 #### Part A: Stochastic Computing [2 pt/question, 8 points]
 
-The provided scaffold code runs 10,000 trials of the `0.8*0.4 + 0.6` stochastic computation and plots the distribution of results. The `PART_A_example_computation` function executes the above numeric expression, and the `run_stochastic_computation` runs a stochastic computation for <ntrials> trials and plots the distribution + reports the mean and standard deviation of the stochastic executions. The vertical red line shows the expected result. Currently, the stochastic computing operations and value-to-bitstream / bitstream-to-value conversion routines are not implemented. 
+The provided scaffold code runs 10,000 trials of the `1/2*(0.8*0.4 + 0.6)` stochastic computation and plots the distribution of results. The `PART_A_example_computation` function executes the above numeric expression, and the `run_stochastic_computation` runs a stochastic computation for <ntrials> trials and plots the distribution + reports the mean and standard deviation of the stochastic executions. The vertical red line shows the expected result. Currently, the stochastic computing operations and value-to-bitstream / bitstream-to-value conversion routines are not implemented. 
 
 Implement the stochastic computing paradigm by filling in the function stubs in the PosStochComputing class. Don't worry about supporting negative numbers just yet.
 
@@ -21,7 +21,7 @@ Q4. Design a stochastic computation for bitstreams with a length n=1000, such th
 
 #### Part X: Non-Idealities Stochastic Computing [2 pt/question, 6 points]
 
-Next, we'll experiment with introducing non-idealities into the stochastic computation `0.8*0.4 + 0.6`. We will introduce two kinds of non-idealities:
+Next, we'll experiment with introducing non-idealities into the stochastic computation `1/2*(0.8*0.4 + 0.6)`. We will introduce two kinds of non-idealities:
 
 - bit-shift errors: this class of errors result from timing issues in circuits. This non-ideality causes one bitstream to lag behind the other during computation. For example, a bit shift error at index 1 of a bit stream would transform some stream 00101 to 00010 (the 0 at index 1 is replicated). We do not consider the case where more than one bit shift occurs at the same index, as it is unlikely to happen in practice.
 
@@ -29,9 +29,9 @@ Next, we'll experiment with introducing non-idealities into the stochastic compu
 
 Fill in the `apply_bitshift` and `apply_bitflip` functions in the stochastic computing class and apply these non-idealities at the appropriate points in the stochastic computing model. Make sure these non-idealities are only enabled for this section of the homework.
 
-Q1. What happens to the computational results when you introduce a per-bit bit-flip error probability of 0.0001? What happens when the per-bit bit flip error probability is 0.01?
+Q1. What happens to the computational results when you introduce a per-bit bit-flip error probability of 0.0001? What happens when the per-bit bit flip error probability is 0.1?
 
-Q2. What happens to the computational results when you introduce a per-bit bit-shift error probability of 0.0001? What happens when the per-bit bit shift error probability is 0.01?
+Q2. What happens to the computational results when you introduce a per-bit bit-shift error probability of 0.0001? What happens when the per-bit bit shift error probability is 0.1?
 
 Q3. In summary, is the computation affected by these non-idealities? Do you see any changes in behavior as the bitstream length grows?
 
@@ -54,7 +54,7 @@ where `prec_x`, `prec_y`, and `prec_z` are the precisions of x, y, and z respect
     - `stoch_mul`, given two stochastic bitstreams that can represent values with precision `prec1` and `prec2` respectively, figure out the precision required for the result stochastic bitstream given a multiplication operation is performed. Update the static analyzer to incorporate any new information.
     - `get_size`, given all of the operations and variables analyzed so far, return the smallest possible bitstream size that accurately executes all operations, and can accurately represent all values.
 
-We will use this static analysis to figure out what stochastic bistream length to use for the computation (w*x + b), where the precision of w is 0.01, the precision of x is 0.1, and the precision of b is 0.1. For convenience, the scaffold file provides helper functions `PART_Y_analyze_wxb_function` for analyzing the `w*x+b` function, given a dictionary of precisions for variables `w`, `x`, and `b`, a `PART_Y_execute_wxb_function` which executes the `w*x+b` function using stochastic computing given a dictionary of variable values for `w`, `x`, and `b`, and a `PART_Y_test_analysis` function which uses the static analysis to find the best bitstream size for the `w*x+b` expresison, and then uses the size returned by the static analyzer to execute the `w*x+b` for ten random variable values that have the promised precisions.
+We will use this static analysis to figure out what stochastic bistream length to use for the computation 1/2*(w*x + b), where the precision of w is 0.01, the precision of x is 0.1, and the precision of b is 0.1. For convenience, the scaffold file provides helper functions `PART_Y_analyze_wxb_function` for analyzing the `1/2*(w*x+b)` function, given a dictionary of precisions for variables `w`, `x`, and `b`, a `PART_Y_execute_wxb_function` which executes the `1/2*(w*x+b)` function using stochastic computing given a dictionary of variable values for `w`, `x`, and `b`, and a `PART_Y_test_analysis` function which uses the static analysis to find the best bitstream size for the `1/2*(w*x+b)` expresison, and then uses the size returned by the static analyzer to execute the `1/2*(w*x+b)` for ten random variable values that have the promised precisions.
 
 Q1. Describe how your precision analysis works. Specifically, how do you propagate the precisions through the entire computation? How do you determine the final size?
 
@@ -64,7 +64,7 @@ Q3. How did the random executions perform when parametrized with the analyzer-se
  
 #### Part Z: Sources of Error in Stochastic Computing [2 pt/question, 4 points]
 
-Next, we will investigate the `PART_Z_execute_rng_efficient_computation` stochastic computaton. This computation implements $x*x+x$, and implements an optimization (`save_rngs=True`) that reuses the bitstream for x to reduce the number of random number generators.
+Next, we will investigate the `PART_Z_execute_rng_efficient_computation` stochastic computaton. This computation implements `1/2*(x*x+x)`, and implements an optimization (`save_rngs=True`) that reuses the bitstream for x to reduce the number of random number generators.
 
 Q1. Does the accuracy of the computation change when the `save_rngs` optimization is enabled? Why or why not?
 
